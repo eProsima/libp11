@@ -9,11 +9,13 @@ DEBUG_LINK = /DEBUG
 
 !IF "$(BUILD_FOR)" == "WIN64"
 MACHINE = /MACHINE:X64
+OPENSSL_LIB_ARCH = x64
 !IF "$(OPENSSL_DIR)" == ""
 OPENSSL_DIR = C:\OpenSSL-Win64
 !ENDIF
 !ELSE
 MACHINE = /MACHINE:X86
+OPENSSL_LIB_ARCH = x86
 !IF "$(OPENSSL_DIR)" == ""
 OPENSSL_DIR = C:\OpenSSL-Win32
 !ENDIF
@@ -29,7 +31,7 @@ OPENSSL_LIB = $(OPENSSL_DIR)\lib\libeay32.lib
 !MESSAGE OpenSSL < 1.1.0 detected (dynamic library)
 !ELSE
 !MESSAGE OpenSSL >= 1.1.0 detected (dynamic library)
-OPENSSL_LIB = $(OPENSSL_DIR)\lib\libcrypto.lib
+OPENSSL_LIB = $(OPENSSL_DIR)\lib\VC\$(OPENSSL_LIB_ARCH)\MT\libcrypto.lib
 !ENDIF
 !ELSE
 OPENSSL_LIB = $(OPENSSL_DIR)\lib\VC\static\libeay32MT$(DEBUG_SUFFIX).lib
